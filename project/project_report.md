@@ -19,11 +19,12 @@ Based on these insights, new features were created, including 'hour of the day',
 
 
 ### How much better did your model preform after adding additional features and why do you think that is?
-The model's performance improved significantly after adding time-related features, as evidenced by a lower RMSLE on the Kaggle leaderboard. 
+After adding additional features, the model's Kaggle score improved from 1.80385 to 0.61583, representing a percentage increase of approximately 65.85%. Despite the negative percentage increase, adding additional features likely provided the model with more relevant information to make predictions, which could have improved its generalization and predictive performance.
+
 
 ## Hyper parameter tuning
 ### How much better did your model preform after trying different hyper parameters?
-Hyperparameter tuning led to further improvements, with a noticeable decrease in RMSLE.
+After trying different hyperparameters through hyperparameter optimization, the model's Kaggle score further improved to 0.55215, indicating a percentage increase of approximately 69.41% compared to the initial score. Hyperparameter optimization fine-tuned the model's parameters, potentially leading to better generalization and performance on unseen data.
 
 ### If you were given more time with this dataset, where do you think you would spend more time?
 Given more time, I would explore additional feature engineering, particularly focusing on weather conditions and integrating external data sources like local events which could influence bike rental demand. 
