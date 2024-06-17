@@ -1,4 +1,4 @@
-# Project Title
+# Image Classification using AWS SageMaker
 
 Capstone Project: Fine-Tuning a Pretrained Model with AWS SageMaker
 
