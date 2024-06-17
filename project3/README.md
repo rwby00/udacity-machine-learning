@@ -110,7 +110,3 @@ Summarize the key takeaways from the project, including any challenges faced and
 
 - [AWS SageMaker Documentation](https://docs.aws.amazon.com/sagemaker/index.html)
 - [PyTorch Documentation](https://pytorch.org/docs/stable/index.html)
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
