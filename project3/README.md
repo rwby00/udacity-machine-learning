@@ -4,23 +4,14 @@ Capstone Project: Fine-Tuning a Pretrained Model with AWS SageMaker
 
 ## Project Overview
 
-Welcome to the capstone project of this course, where you will apply the skills and knowledge you've gained to a real-world challenge. In this project, you will leverage AWS SageMaker to fine-tune a pre-trained model for the task of image classification. The goal is to demonstrate the setup of an ML infrastructure that can facilitate the training of accurate models by you or other developers.
+This project demonstrates how to use Amazon SageMaker to build, train, and deploy an image classification model. The model is based on a pre-trained ResNet50 network from the torchvision library, fine-tuned for a specific classification task.
 
 ## Project Objectives and Outcomes
-
-Your task is to utilize AWS SageMaker's comprehensive suite of tools to build, train, and deploy a machine learning model. Here's what you're expected to accomplish:
 
 - **Model Fine-Tuning**: Choose a pre-trained model, such as ResNet50, and apply transfer learning techniques to adapt it to your chosen dataset.
 - **SageMaker Features**: Implement SageMaker's profiling and debugging tools to monitor model training and performance. Conduct hyperparameter tuning to optimize your model's performance.
 - **Model Deployment**: Deploy your fine-tuned model to a SageMaker endpoint. Ensure that you can query the deployed model with a sample image to retrieve a prediction.
 
-## Project Pipeline Overview
-
-As an ML Engineer, you will manage the flow of various components such as data, models, metrics, and predictions through the following stages:
-
-1. **Data Preparation**: Process and prepare your image data for training.
-2. **Model Training and Tuning**: Train your model using SageMaker and fine-tune it with hyperparameter optimization.
-3. **Model Deployment and Testing**: Deploy the trained model to an endpoint and test it with real-world data to ensure functionality.
 
 ## Setup Instructions
 

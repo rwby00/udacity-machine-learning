@@ -53,27 +53,17 @@ def test(model, test_loader, criterion, device, hook):
 #------------------------------------------------------------------------------------------
 
 def train(model, train_loaders, epochs, criterion, optimizer, device, hook):
-    '''
-    TODO: Complete this function that can take a model and
-          data loaders for training and will get train the model
-          Remember to include any debugging/profiling hooks that you might need
-    '''
-
-    # training code
     for epoch in range(epochs):
-        # for each epoch do a training step and an evaluation step
         for phase in ['train', 'valid']:
             running_loss = 0
             running_correct = 0
         
             if phase == 'train':
                 model.train()
-                # set the hook to training mode
                 if hook:
                     hook.set_mode(smd.modes.TRAIN)
             else:
                 model.eval()
-                # set the hook to evaluation mode for validation
                 if hook:
                     hook.set_mode(smd.modes.EVAL)
         
@@ -87,13 +77,10 @@ def train(model, train_loaders, epochs, criterion, optimizer, device, hook):
                 _, preds = torch.max(outputs, 1)
             
                 running_loss += loss.item() * data.size(0)
-            #==========================
                 with torch.no_grad():
                     running_correct += torch.sum(preds == target).item()
-            #==========================
             
                 if phase == 'train':
-                    # do backward propagation
                     optimizer.zero_grad()
                     loss.backward()
                     optimizer.step()
@@ -105,22 +92,14 @@ def train(model, train_loaders, epochs, criterion, optimizer, device, hook):
 
     return model
     
-def net():
-    '''
-    TODO: Complete this function that initializes your model
-          Remember to use a pretrained model
-    '''
+def net(device):
     num_classes = 133
-    # load the pretrained model
     model = models.resnet50(pretrained=True)
-    # freeze the different parameters of the model to use for feature extraction
     for param in model.parameters():
         param.requires_grad = False
-    # find the number of inputs to the final layer of the network
     num_inputs = model.fc.in_features
-    # replace the fc layer trained on imageNet with the fc for our dataset
     model.fc = nn.Linear(num_inputs, num_classes)
-    
+    model = model.to(device)
     return model
 
 #-----------------------------------------------------------------------------------------------------------
@@ -151,7 +130,7 @@ def main(args):
     '''
     TODO: Initialize a model by calling the net function
     '''
-    model=net()
+    model=net(device)
     # create the debugging profiling hook
     hook = smd.Hook.create_from_json_file()
     # register the model for debugging and saving tensors
@@ -222,37 +201,14 @@ def main(args):
     path = os.path.join(args.model_dir, 'model.pth')
     torch.save(model.cpu().state_dict(), path)
 
-if __name__=='__main__':
-    parser=argparse.ArgumentParser()
-    '''
-    TODO: Specify any training args that you might need
-    '''
-    # Training settings
-    # epoch
-    parser.add_argument(
-        "--epochs",
-        type=int,
-        default=1,
-        metavar="E",
-        help="number of epochs to train (default: 1)",
-    )
-    # batch_size
-    parser.add_argument(
-        "--batch-size",
-        type=int,
-        default=64,
-        metavar="N",
-        help="input batch size for training (default: 64)",
-    )
-    # lr
-    parser.add_argument(
-        "--lr", type=float, default=1.0, metavar="LR", help="learning rate (default: 1.0)"
-    )
-
-    # Container environment
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--epochs", type=int, default=1, metavar="E", help="number of epochs to train (default: 1)")
+    parser.add_argument("--batch-size", type=int, default=64, metavar="N", help="input batch size for training (default: 64)")
+    parser.add_argument("--lr", type=float, default=1.0, metavar="LR", help="learning rate (default: 1.0)")
     parser.add_argument("--model-dir", type=str, default=os.environ["SM_MODEL_DIR"])
     parser.add_argument("--data-dir", type=str, default=os.environ["SM_CHANNEL_DATA"])
     parser.add_argument('--output-dir', type=str, default=os.environ['SM_OUTPUT_DATA_DIR'])
-    args=parser.parse_args()
-    
+    args = parser.parse_args()
+
     main(args)
