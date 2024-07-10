@@ -16,7 +16,7 @@ In this project, we will follow the steps below:
 #### Notebook Instance
 Created sagemaker notebook instance I have used ml.t3.medium as this is suffiecint to run my notebook.
 
-![Notebook Instance](./screenshots/notebook-instances.png)
+![notebook](screenshots/notebook-instances.png)
 
 #### S3 Bucket
 Mention the S3 bucket used for storing data and any specific configurations.
